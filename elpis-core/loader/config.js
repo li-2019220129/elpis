@@ -18,7 +18,7 @@ const { sep } = path;
 
 module.exports = app => {
     // 获取 config/ 目录
-    const configPath = path.resolve(app.businessPath, `.${sep}config`);
+    const configPath = path.resolve(app.baseDir, `.${sep}config`);
 
     // 获取 default.config
     let defaultConfig = {};
@@ -27,7 +27,7 @@ module.exports = app => {
             path.resolve(configPath, `${sep}config.default.js`)
         )(app);
     } catch (e) {
-        console.log(e);
+        console.log(`there is no config.default.js`);
     }
     // 获取 env.config
     let envConfig = {};
@@ -40,7 +40,7 @@ module.exports = app => {
             envConfig = require(
                 path.resolve(configPath, `${sep}config.beta.js`)
             );
-        } else if (app.env.isProduction()) {
+        } else if (app.env.isProd()) {
             envConfig = require(
                 path.resolve(configPath, `${sep}config.prod.js`)
             );

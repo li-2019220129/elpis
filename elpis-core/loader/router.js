@@ -9,7 +9,7 @@ const glob = require('glob');
  */
 module.exports = app => {
     //找到路由文件路径
-    const routerPath = path.resolve(app.config.baseDir, `.${sep}router`);
+    const routerPath = path.resolve(app.businessPath, `.${sep}router`);
     //实例化 KoaRouter
     const router = new KoaRouter();
 
