@@ -14,6 +14,7 @@ module.exports = {
     start: (options = {}) => {
         const app = new Koa();
         app.options = options;
+        // 设置 app 的 baseDir 属性为当前工作目录，即 Node.js 进程启动时所在的目录
         app.baseDir = process.cwd();
         app.businessPath = path.resolve(app.baseDir, `.${sep}app`);
         app.env = env(app);

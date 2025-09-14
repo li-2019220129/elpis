@@ -4,6 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "dev": "set _ENV=local && nodemon index.js",
+        "beta": "set _ENV=beta && node index.js",
+        "prod": "set _ENV=production && node index.js",
         "lint": "eslint . --ext .js,.vue",
         "lint:fix": "eslint . --ext .js,.vue --fix",
         "format": "prettier --write ./**/*.{js,vue}",

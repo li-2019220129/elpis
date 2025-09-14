@@ -24,8 +24,8 @@ module.exports = app => {
     let defaultConfig = {};
     try {
         defaultConfig = require(
-            path.resolve(configPath, `${sep}config.default.js`)
-        )(app);
+            path.resolve(configPath, `.${sep}config.default.js`)
+        );
     } catch (e) {
         console.log(`there is no config.default.js`);
     }
@@ -34,15 +34,15 @@ module.exports = app => {
     try {
         if (app.env.isLocal()) {
             envConfig = require(
-                path.resolve(configPath, `${sep}config.local.js`)
+                path.resolve(configPath, `.${sep}config.local.js`)
             );
         } else if (app.env.isBeta()) {
             envConfig = require(
-                path.resolve(configPath, `${sep}config.beta.js`)
+                path.resolve(configPath, `.${sep}config.beta.js`)
             );
         } else if (app.env.isProd()) {
             envConfig = require(
-                path.resolve(configPath, `${sep}config.prod.js`)
+                path.resolve(configPath, `.${sep}config.prod.js`)
             );
         }
     } catch (e) {
@@ -50,4 +50,5 @@ module.exports = app => {
     }
     // 覆盖并加载 config 配置
     app.config = Object.assign({}, defaultConfig, envConfig);
+    console.log(app.config, 'app.config');
 };
