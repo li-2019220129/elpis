@@ -14,7 +14,7 @@ module.exports = app => {
     fileList.forEach(file => {
         let name = path.resolve(file);
         name = name.substring(
-            name.lastIndexOf(`controllers${sep}`) + `controllers${sep}`.length,
+            name.lastIndexOf(`controller${sep}`) + `controller${sep}`.length,
             name.lastIndexOf('.')
         );
         name = name.replace(/[_-][a-z]/gi, s => s.substring(1).toUpperCase());
