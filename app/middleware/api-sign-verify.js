@@ -3,7 +3,7 @@ const md5 = require('md5');
 module.exports = app => {
     return async (ctx, next) => {
         // 只对API 请求进行签名验证
-        if (ctx.request.path.startsWith('/api')) {
+        if (!ctx.request.path.includes('/api')) {
             return await next();
         }
 
