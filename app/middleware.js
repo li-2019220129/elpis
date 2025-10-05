@@ -13,4 +13,14 @@ module.exports = app => {
             },
         })
     );
+    const bodyParser = require('koa-bodyparser');
+    app.use(
+        bodyParser(
+            { formList: '1000mb' },
+            { enableTypes: ['json', 'form', 'text'] }
+        )
+    );
+
+    // 引入异常捕获中间件
+    app.use(app.middlewares.errorHandler);
 };
