@@ -26,6 +26,7 @@ module.exports = {
         'no-unused-vars': 'warn',
         'import/no-unresolved': 'off',
         'prettier/prettier': 'error',
+        'vue/multi-word-component-names': 'off',
     },
     settings: {
         'import/resolver': {

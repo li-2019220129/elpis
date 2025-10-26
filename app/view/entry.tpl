@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>{{name}}</title>
     <link rel="stylesheet" href="/static/normalize.css">
     <link rel="icon" type="image/x-icon" href="/static/icon.jpg">
@@ -21,23 +22,7 @@
     const options = document.getElementById('options').value;
     window.options = JSON.parse(options);
 
-    const signKey = 'keerwo1ifnjei29958kfkskdfirejiW';
-    const st = Date.now();
-    axios.request({
-        url: '/api/project/list',
-        method: 'get',
-        params: {
-            proj_key: '1234567890'
-        },
-        headers: {
-            's_t': st,
-            's_sign': MD5(`${signKey}_${st}`)
-        }
-    }).then((res) => {
-        console.log(res.data);
-    }).catch((err) => {
-        console.log(err);
-    })
+
 </script>
 
 </html>
