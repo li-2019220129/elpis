@@ -7,10 +7,12 @@
 
 <script setup>
 import { ref } from 'vue';
+import './a.css';
+import utils from '$common/utils';
 const content = ref('page2');
 console.log(content.value);
 </script>
-<style scoped>
+<style lang="less" scoped>
 .page1 h1 {
     font-size: 20px;
     text-align: center;

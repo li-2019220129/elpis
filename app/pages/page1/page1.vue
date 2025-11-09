@@ -7,10 +7,11 @@
 
 <script setup>
 import { ref } from 'vue';
+import utils from '$common/utils';
 const content = ref('page1');
 console.log(content.value);
 </script>
-<style>
+<style lang="less" scoped>
 .page1 {
     flex-direction: column;
     background-color: #f5f5f5;

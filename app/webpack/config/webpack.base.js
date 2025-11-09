@@ -5,30 +5,39 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const webpack = require('webpack');
+const glob = require('glob');
+const pageEntries = {};
+
+const htmlWebpackPluginList = [];
+
+const entryLst = path.resolve(process.cwd(), './app/pages/**/entry.*.js');
+glob.sync(entryLst).forEach(entry => {
+    const entryName = path.basename(entry, '.js');
+    pageEntries[entryName] = entry;
+    htmlWebpackPluginList.push(
+        new HtmlWebpackPlugin({
+            template: path.resolve(process.cwd(), './app/view/entry.tpl'),
+            filename: path.resolve(
+                process.cwd(),
+                './app/public/dist/',
+                `${entryName}.tpl`
+            ),
+            chunks: [entryName],
+        })
+    );
+});
+
 module.exports = {
     // 入口文件
-    entry: {
-        'entry.page1': ['./app/pages/page1/entry.page1.js'],
-        'entry.page2': ['./app/pages/page2/entry.page2.js'],
-    },
+    entry: pageEntries,
     // 输出配置
-    output: {
-        path: path.join(process.cwd(), './app/public/dist/prod'),
-        filename: 'js/[name]_[chunkhash:8].bundle.js',
-        publicPath: '/dist/prod',
-        clean: true,
-        crossOriginLoading: 'anonymous',
-    },
+    output: {},
     // 模块解析规则
     module: {
         rules: [
             {
                 test: /\.vue$/,
                 use: ['vue-loader'],
-            },
-            {
-                test: /\.html$/,
-                use: ['html-loader'],
             },
             {
                 test: /\.js$/,
@@ -67,6 +76,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue', '.css', '.less', '.scss', '.json'],
         alias: {
+            $stores: path.resolve(process.cwd(), './app/pages/stores'),
+            $widgets: path.resolve(process.cwd(), './app/pages/widgets'),
+            $common: path.resolve(process.cwd(), './app/pages/common'),
             $pages: path.resolve(process.cwd(), './app/pages'),
         },
     },
@@ -79,31 +91,32 @@ module.exports = {
         new webpack.DefinePlugin({
             __VUE_OPTIONS_API__: 'true',
             __VUE_PROD_DEVTOOLS__: 'false',
-            __VUE_PROD_HYDRATION__MISMATCH_DETAILS__: 'false',
+            __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(false),
         }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(process.cwd(), './app/view/entry.tpl'),
-            filename: path.resolve(
-                process.cwd(),
-                './app/public/dist/',
-                'entry.page1.tpl'
-            ),
-            chunks: ['entry.page1'],
-        }),
-        new HtmlWebpackPlugin({
-            template: path.resolve(process.cwd(), './app/view/entry.tpl'),
-            filename: path.resolve(
-                process.cwd(),
-                './app/public/dist/',
-                'entry.page2.tpl'
-            ),
-            chunks: ['entry.page2'],
-        }),
+        ...htmlWebpackPluginList,
     ],
     // 配置打包输出优化 （代码分割，模块合并，缓存，Tree Shaking,压缩等优化策略）
     optimization: {
         splitChunks: {
             chunks: 'all',
+            maxAsyncRequests: 10,
+            maxInitialRequests: 10,
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    priority: 20,
+                    enforce: true,
+                    reuseExistingChunk: true,
+                },
+                common: {
+                    name: 'common',
+                    minChunks: 2,
+                    minSize: 1,
+                    priority: 10,
+                    reuseExistingChunk: true,
+                },
+            },
         },
     },
 };

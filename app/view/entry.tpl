@@ -13,16 +13,14 @@
 </head>
 
 <body>
-    <h1>Page1</h1>
     <input id="env" value="{{env}}">
     <input id="options" value="{{options}}">
+    <div id="root"></div>
 </body>
 <script type="text/javascript">
     const env = document.getElementById('env').value;
     const options = document.getElementById('options').value;
     window.options = JSON.parse(options);
-
-
 </script>
 
 </html>
