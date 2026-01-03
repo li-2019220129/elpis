@@ -12,6 +12,7 @@ yarn-error.log*
 /*.so
 /*.dylib
 
+./app/public/dist
 # Logs
 logs
 *.log
