@@ -12,6 +12,7 @@ const htmlWebpackPluginList = [];
 
 const entryLst = path.resolve(process.cwd(), './app/pages/**/entry.*.js');
 glob.sync(entryLst).forEach(entry => {
+    console.log(entry);
     const entryName = path.basename(entry, '.js');
     pageEntries[entryName] = entry;
     htmlWebpackPluginList.push(

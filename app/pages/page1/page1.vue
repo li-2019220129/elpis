@@ -1,6 +1,7 @@
 <template>
     <div class="page1">
         <h1>{{ content }}</h1>
+        <h1>{{ content1 }}</h1>
         <input v-model="content" type="text" placeholder="请输入内容" />
     </div>
 </template>
@@ -9,6 +10,8 @@
 import { ref } from 'vue';
 import utils from '$common/utils';
 const content = ref('page1');
+
+const content1 = ref('page344');
 console.log(content.value);
 </script>
 <style lang="less" scoped>
