@@ -2,16 +2,36 @@
     <div class="page1">
         <h1>{{ content }}</h1>
         <h1>{{ content1 }}</h1>
-        <input v-model="content" type="text" placeholder="请输入内容" />
+        <el-input v-model="content" type="text" placeholder="请输入内容" />
+
+        <el-table :data="tableData" style="width: 100%">
+            <el-table-column prop="id" label="ID" width="180" />
+            <el-table-column prop="name" label="Name" width="180" />
+        </el-table>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import utils from '$common/utils';
+import curl from '$common/curl';
 const content = ref('page1');
+const tableData = ref([
 
-const content1 = ref('page344');
+]);
+
+onMounted(async () => {
+    const res = await curl({
+        url: '/api/project/list',
+        method: 'get',
+        query: {
+            proj_key: 'page1',
+        },
+    });
+    console.log(res);
+    tableData.value = res.data || [];
+});
+const content1 = ref('page3474');
 console.log(content.value);
 </script>
 <style lang="less" scoped>

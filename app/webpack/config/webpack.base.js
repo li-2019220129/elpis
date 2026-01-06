@@ -88,6 +88,8 @@ module.exports = {
         new VueLoaderPlugin(),
         new webpack.ProvidePlugin({
             Vue: 'vue',
+            axios: 'axios',
+            _: 'lodash',
         }),
         new webpack.DefinePlugin({
             __VUE_OPTIONS_API__: 'true',

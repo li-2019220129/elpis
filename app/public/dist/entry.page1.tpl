@@ -10,7 +10,7 @@
     https://cdn.jsdelivr.net/npm/md5@2.3.0/dist/md5.min.js
     "></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script defer src="http://127.0.0.1:9002/public/dist/dev/js/vendor_63be8a52.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/common_3a40fdb6.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/entry.page1_670ee3c2.bundle.js"></script></head>
+<script defer src="http://127.0.0.1:9002/public/dist/dev/js/vendor_52de8a24.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/common_f4fff91f.bundle.js"></script><script defer src="http://127.0.0.1:9002/public/dist/dev/js/entry.page1_37b324ca.bundle.js"></script></head>
 
 <body>
     <input id="env" value="{{env}}">
